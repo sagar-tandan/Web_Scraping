@@ -17,9 +17,12 @@ def get_page_html(url):
 def get_product_price(soup):
     main_price_span = soup.find('span',attrs ={
         'class': 'a-size-mini olpWrapper'
-    })
-    return(main_price_span)
-    
+    })   
+    price = main_price_span.text.strip().split()
+    list_len = len(price)
+    final_price = price[list_len-1]     
+    return final_price.replace('$','').replace(',','')
+
     
     
 def extract_product_info(url):
@@ -29,7 +32,7 @@ def extract_product_info(url):
     # print(html)
     soup = bs4.BeautifulSoup(html,'lxml')
     product_info['price'] = get_product_price(soup)
-    print([product_info])
+    return product_info
 
 if __name__ == "__main__":
     with open('amazon_products_url.csv',newline='') as csvfile:
