@@ -41,7 +41,20 @@ def get_product_ratings(soup):
     except ValueError:
         return 'Something went wrong'
     
-                              
+
+def get_product_technical_details(soup):
+    details = {}
+    technical_details_section = soup.find('div', id = 'prodDetails')
+    data_table = technical_details_section.findAll('table', id= 'productDetails_techSpec_section_1')
+    for table in data_table:
+        table_rows = table.findAll('tr')
+        for row in table_rows:
+            row_key = row.find('th').text.strip()
+            row_value = row.find('td').text.strip()
+            details[row_key] = row_value
+    return details
+    
+                   
 def extract_product_info(url):
     product_info = {}
     print(f'Scraping URL: {url}')
@@ -51,6 +64,7 @@ def extract_product_info(url):
     product_info['price'] = get_product_price(soup)
     product_info['title'] = get_product_title(soup)
     product_info['rating'] =get_product_ratings(soup)
+    product_info.update(get_product_technical_details(soup))
     return product_info
 
 if __name__ == "__main__":
