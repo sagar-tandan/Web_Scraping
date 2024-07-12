@@ -32,7 +32,7 @@ def extract_product_info(url):
     # print(html)
     soup = bs4.BeautifulSoup(html,'lxml')
     product_info['price'] = get_product_price(soup)
-    return product_info
+    return product_info['price']
 
 if __name__ == "__main__":
     with open('amazon_products_url.csv',newline='') as csvfile:
