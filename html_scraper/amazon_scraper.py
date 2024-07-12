@@ -50,7 +50,7 @@ def get_product_technical_details(soup):
         table_rows = table.findAll('tr')
         for row in table_rows:
             row_key = row.find('th').text.strip()
-            row_value = row.find('td').text.strip()
+            row_value = row.find('td').text.strip().replace('\u200e','')
             details[row_key] = row_value
     return details
     
@@ -68,10 +68,18 @@ def extract_product_info(url):
     return product_info
 
 if __name__ == "__main__":
+    product_data = []
     with open('amazon_products_url.csv',newline='') as csvfile:
         reader = csv.reader(csvfile,delimiter=',')
         for row in reader:
             url = row[0]
             # print(url)
-            print(extract_product_info(url))
+            product_data.append(extract_product_info(url))
+            # print(product_data)
+    output_filename = 'output-{}.csv'.format(datetime.today().strftime("%m-%d-%Y"))
+    with open(output_filename,'w') as outputfile:
+        writer = csv.writer(outputfile)
+        writer.writerow(product_data[0].keys())
+        for product in product_data:
+            writer.writerow(product.values())
 
