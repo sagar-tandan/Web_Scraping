@@ -23,8 +23,10 @@ def get_product_price(soup):
     final_price = price[list_len-1]     
     return final_price.replace('$','').replace(',','')
 
-    
-    
+def get_product_title(soup):
+    product_title = soup.find('span', id="productTitle" )
+    return product_title.text.strip()
+                              
 def extract_product_info(url):
     product_info = {}
     print(f'Scraping URL: {url}')
@@ -32,7 +34,8 @@ def extract_product_info(url):
     # print(html)
     soup = bs4.BeautifulSoup(html,'lxml')
     product_info['price'] = get_product_price(soup)
-    return product_info['price']
+    product_info['title'] = get_product_title(soup)
+    return product_info
 
 if __name__ == "__main__":
     with open('amazon_products_url.csv',newline='') as csvfile:
