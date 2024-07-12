@@ -26,6 +26,21 @@ def get_product_price(soup):
 def get_product_title(soup):
     product_title = soup.find('span', id="productTitle" )
     return product_title.text.strip()
+
+def get_product_ratings(soup):
+    product_rating_div = soup.find('div', id='averageCustomerReviews')
+    product_rating_section = product_rating_div.find('i',attrs={
+        'class':'a-icon-star'
+    })
+    product_rating_span = product_rating_section.find('span',attrs={
+        'class': 'a-icon-alt'
+    })
+    try:
+        return (product_rating_span.text.strip().split()[0])
+        
+    except ValueError:
+        return 'Something went wrong'
+    
                               
 def extract_product_info(url):
     product_info = {}
@@ -35,6 +50,7 @@ def extract_product_info(url):
     soup = bs4.BeautifulSoup(html,'lxml')
     product_info['price'] = get_product_price(soup)
     product_info['title'] = get_product_title(soup)
+    product_info['rating'] =get_product_ratings(soup)
     return product_info
 
 if __name__ == "__main__":
