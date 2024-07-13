@@ -4,12 +4,19 @@ from datetime import datetime
 import requests
 import csv
 import bs4
+import concurrent.futures
+from tqdm import tqdm
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.3"
 REQUEST_HEADER = {
     'USer-Agent': USER_AGENT,
     'Accept-Language': 'en-US, en;q=0.5',
 }
+
+NO_THREADS = 10
+
+
+
 def get_page_html(url):
     res = requests.get(url= url,headers=REQUEST_HEADER)
     return res.content
