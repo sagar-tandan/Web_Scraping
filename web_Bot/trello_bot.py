@@ -10,9 +10,15 @@ import json
 service = Service(executable_path='chromedriver.exe')
 DRIVER = webdriver.Chrome(service=service)
         
+        
+def login():
+    with open('config.json') as configfile:
+        credentials = json.load(configfile)
+        print(credentials)
 def main():
     try:
         DRIVER.get('https://trello.com')
+        login()
         input("Bot operation Completed. Press any Key...")
         DRIVER.close()
     except Exception as e:
