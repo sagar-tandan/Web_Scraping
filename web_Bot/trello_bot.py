@@ -19,11 +19,20 @@ def login():
         time.sleep(2)
         DRIVER.find_element(By.XPATH, value="//a[@href='https://id.atlassian.com/login?application=trello&continue=https%3A%2F%2Ftrello.com%2Fauth%2Fatlassian%2Fcallback%3Fdisplay%3DeyJ2ZXJpZmljYXRpb25TdHJhdGVneSI6InNvZnQifQ%253D%253D&display=eyJ2ZXJpZmljYXRpb25TdHJhdGVneSI6InNvZnQifQ%3D%3D']").click()
         time.sleep(2)
-        username = DRIVER.find_element(By.CSS_SELECTOR,value="[name='username']")
+        username = DRIVER.find_element(By.CSS_SELECTOR,value="input[name='username']")
         username.clear()
         username.send_keys(credentials["USERNAME"])
         time.sleep(2)
-        
+        DRIVER.find_element(By.CSS_SELECTOR, value = "button[id = 'login-submit']").click()
+        time.sleep(2)
+        password = DRIVER.find_element(By.CSS_SELECTOR, value= "input[name = 'password']")
+        password.clear()
+        password.send_keys(credentials["PASSWORD"])
+        time.sleep(2)
+        DRIVER.find_element(By.CSS_SELECTOR, value = "button[id = 'login-submit']").click()
+        time.sleep(8)
+        DRIVER.find_element(By.CSS_SELECTOR, value = "button[id ='mfa-promote-dismiss']").click()
+        time.sleep(2)
        
 def main():
     try:
