@@ -46,14 +46,24 @@ def addTask():
     textArea.send_keys('Bot Added a Task')
     time.sleep(1)
     DRIVER.find_element(By.CSS_SELECTOR,value="button[data-testid = 'list-card-composer-add-card-button']").click()
+    time.sleep(1)
+    DRIVER.find_element(By.CSS_SELECTOR, value = "span[data-testid='CloseIcon']").click()
     time.sleep(2)
-
+    
+def takeScreenshot():
+    date_str = date.today().strftime("%m-%d-%Y")
+    fpath = os.path.join('downloads', f'{date_str}.png')
+    DRIVER.get_screenshot_as_file(fpath)
+    print("Screenshot is added to downloads folder!")
+    
 def main():
     try:
         DRIVER.get('https://trello.com')
         login()
+        time.sleep(3)
         navigateToBoard()
         addTask()
+        takeScreenshot()
         input("Bot operation Completed. Press any Key...")
         DRIVER.close()
     except Exception as e:
