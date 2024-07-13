@@ -36,13 +36,24 @@ def login():
 
 def navigateToBoard():
     DRIVER.find_element(By.XPATH, value= "//a[@href='/b/CeGTMO68/bot-board']").click()
-    time.sleep(4)
+    time.sleep(5)
     
+def addTask():
+    DRIVER.find_element(By.CSS_SELECTOR,value="button[data-testid = 'list-add-card-button']").click()
+    time.sleep(2)
+    textArea= DRIVER.find_element(By.CSS_SELECTOR, value= "textarea[data-testid = 'list-card-composer-textarea']")
+    textArea.clear()
+    textArea.send_keys('Bot Added a Task')
+    time.sleep(1)
+    DRIVER.find_element(By.CSS_SELECTOR,value="button[data-testid = 'list-card-composer-add-card-button']").click()
+    time.sleep(2)
+
 def main():
     try:
         DRIVER.get('https://trello.com')
         login()
         navigateToBoard()
+        addTask()
         input("Bot operation Completed. Press any Key...")
         DRIVER.close()
     except Exception as e:
