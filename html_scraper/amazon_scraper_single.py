@@ -4,17 +4,13 @@ from datetime import datetime
 import requests
 import csv
 import bs4
-import concurrent.futures
-from tqdm import tqdm
+
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.3"
 REQUEST_HEADER = {
     'USer-Agent': USER_AGENT,
     'Accept-Language': 'en-US, en;q=0.5',
 }
-
-NO_THREADS = 10
-
 
 
 def get_page_html(url):
@@ -77,7 +73,7 @@ def extract_product_info(url):
 if __name__ == "__main__":
     product_data = []
     with open('amazon_products_url.csv',newline='') as csvfile:
-        reader = csv.reader(csvfile,delimiter=',')
+        reader = list(csv.reader(csvfile,delimiter=','))
         for row in reader:
             url = row[0]
             # print(url)
@@ -89,4 +85,6 @@ if __name__ == "__main__":
         writer.writerow(product_data[0].keys())
         for product in product_data:
             writer.writerow(product.values())
+        
+
 
