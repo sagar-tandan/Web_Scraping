@@ -30,14 +30,19 @@ def login():
         password.send_keys(credentials["PASSWORD"])
         time.sleep(2)
         DRIVER.find_element(By.CSS_SELECTOR, value = "button[id = 'login-submit']").click()
-        time.sleep(8)
-        DRIVER.find_element(By.CSS_SELECTOR, value = "button[id ='mfa-promote-dismiss']").click()
-        time.sleep(2)
-       
+        # time.sleep(8)
+        # DRIVER.find_element(By.CSS_SELECTOR, value = "button[id ='mfa-promote-dismiss']").click()
+        time.sleep(5)
+
+def navigateToBoard():
+    DRIVER.find_element(By.XPATH, value= "//a[@href='/b/CeGTMO68/bot-board']").click()
+    time.sleep(4)
+    
 def main():
     try:
         DRIVER.get('https://trello.com')
         login()
+        navigateToBoard()
         input("Bot operation Completed. Press any Key...")
         DRIVER.close()
     except Exception as e:
