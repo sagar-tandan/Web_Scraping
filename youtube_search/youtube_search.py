@@ -20,12 +20,17 @@ def searchBar():
     DRIVER.find_element(By.XPATH, value="//a[@href= '/watch?v=MsRnSLdOKcw&list=PL2vcpLM-49PzkuDV2aTaZVS28EtaS55qk']").click()
     
     
+# def skip_add():
+    # time.sleep(15)
+    # DRIVER.find_element(By.CSS_SELECTOR, value= "[class='ytp-skip-ad-button__text']")
+    
 
 
 def open_youtube():
     DRIVER.get('https://youtube.com')
     time.sleep(2)
     searchBar()
+    # skip_add()
     time.sleep(4)
     input("Bot operation Completed. Press any Key...")
     DRIVER.close()
