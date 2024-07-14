@@ -16,7 +16,8 @@ def searchBar():
     searchField.send_keys('Bahubali OST')
     time.sleep(1)
     DRIVER.find_element(By.CSS_SELECTOR, value= "button[id='search-icon-legacy']").click()
-
+    time.sleep(1)
+    DRIVER.find_element(By.XPATH, value="//a[@href= '/watch?v=MsRnSLdOKcw&list=PL2vcpLM-49PzkuDV2aTaZVS28EtaS55qk']").click()
     
     
 
