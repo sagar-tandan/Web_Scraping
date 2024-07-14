@@ -14,6 +14,10 @@ def searchBar():
     searchField = DRIVER.find_element(By.CSS_SELECTOR, value= "input[id='search']")
     searchField.clear();
     searchField.send_keys('Bahubali OST')
+    time.sleep(1)
+    DRIVER.find_element(By.CSS_SELECTOR, value= "button[id='search-icon-legacy']").click()
+
+    
     
 
 
