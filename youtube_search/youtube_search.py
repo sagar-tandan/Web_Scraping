@@ -30,9 +30,6 @@ def open_youtube():
     input("Bot operation Completed. Press any Key...")
     DRIVER.close()
     
-    
-
-
 
 if __name__ == "__main__":
     open_youtube()
